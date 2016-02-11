@@ -1,4 +1,5 @@
-#include "colormsg_led.h"
+#include "colormsg_serial.h"
+#include "colormsg_leds.h"
 #include "colormsg_lcd.h"
 #include "colormsg_speaker.h"
 #include "colormsg_colorsensor.h"
