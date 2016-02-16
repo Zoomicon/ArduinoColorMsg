@@ -32,25 +32,26 @@ void init_lcd(){
   lcd.begin(16, 2); // Set up the LCD's number of columns and rows
   lcd.noAutoscroll();
   lcd.print("ColorMsg 1.0"); // Print a message to the LCD
+  delay(2000); //show title for 2 sec
 }
 
 void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue){
   lcd.setCursor(0, 1);
-  lcd << red << SPACE;
-  lcd << green << SPACE;
-  lcd << blue << SPACE16; //clean any leftover text from previous color display step (e.g. if values were three-digit ones and now are two-digit ones) at the end (assuming autoscroll isn't on)
+  lcd << red << SPACE
+      << green << SPACE
+      << blue << SPACE16; //clean any leftover text from previous color display step (e.g. if values were three-digit ones and now are two-digit ones) at the end (assuming autoscroll isn't on)
 }
 
-void show_color_name_lcd(uint16_t red, uint16_t green, uint16_t blue, uint16_t threshold){
+void show_color_name_lcd(uint16_t red, uint16_t green, uint16_t blue, uint16_t threshold_red, uint16_t threshold_green, uint16_t threshold_blue){
   lcd.setCursor(0, 0);
   lcd.print(SPACE16); //clear first row
 
   lcd.setCursor(0,0);
-  if (red > threshold)
+  if (red > threshold_red)
     lcd << " red";
-  if (green > threshold)
+  if (green > threshold_green)
     lcd << " green";
-  if (blue > threshold)
+  if (blue > threshold_blue)
     lcd << " blue";
 }
 

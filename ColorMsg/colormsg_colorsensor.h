@@ -6,7 +6,7 @@
 #include <Wire.h> //https://www.arduino.cc/en/Reference/Wire //include required here only for older Arduino IDEs (https://github.com/adafruit/Adafruit_TCS34725/issues/10#issuecomment-182538818)
 #include "Adafruit_TCS34725.h" //https://learn.adafruit.com/adafruit-color-sensors/program-it
 
-Adafruit_TCS34725 tcs(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_1X); //options: 1X, 4X, 16X, 60X
+Adafruit_TCS34725 tcs(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X); //options: 1X, 4X, 16X, 60X
 
 void init_colorsensor(){
   tcs.begin();
