@@ -1,3 +1,7 @@
+/*
+ * Prints to serial output the supplied color RGB value and color component (red, green, blue) names whose value is above given thresholds
+ */
+
 #include <Streaming.h> //http://arduiniana.org/libraries/streaming/
 
 #define SPACE " "

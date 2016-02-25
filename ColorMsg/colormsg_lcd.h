@@ -1,23 +1,22 @@
-//based on http://www.arduino.cc/en/Tutorial/LiquidCrystal
-
 /*
- Uses LiquidCrystal library to drive a 16x2 display.
- 
- The circuit:
- * LCD RS pin to digital pin 12
- * LCD Enable pin to digital pin 11
- * LCD D4 pin to digital pin 5
- * LCD D5 pin to digital pin 4
- * LCD D6 pin to digital pin 3
- * LCD D7 pin to digital pin 2
- * LCD R/W pin to ground
- * LCD VSS pin to ground
- * LCD VCC pin to 5V
- * 10K resistor:
- * ends to +5V and ground
- * wiper to LCD VO pin (pin 3)
-
-*/
+ * Prints to 16x2 LCD display the supplied color RGB value and color component (red, green, blue) names whose value is above given thresholds
+ * 
+ * The circuit:
+ * - LCD RS pin to digital pin 12
+ * - LCD Enable pin to digital pin 11
+ * - LCD D4 pin to digital pin 5
+ * - LCD D5 pin to digital pin 4
+ * - LCD D6 pin to digital pin 3
+ * - LCD D7 pin to digital pin 2
+ * - LCD R/W pin to ground
+ * - LCD VSS pin to ground
+ * - LCD VCC pin to 5V
+ * - 10K resistor:
+ * - ends to +5V and GND
+ * - wiper to LCD VO pin (pin 3)
+ * 
+ * based on http://www.arduino.cc/en/Tutorial/LiquidCrystal
+ */
 
 #include <LiquidCrystal.h> //https://www.arduino.cc/en/Reference/LiquidCrystal
 #include <Streaming.h> //http://arduiniana.org/libraries/streaming/

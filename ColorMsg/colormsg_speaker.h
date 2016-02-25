@@ -1,4 +1,8 @@
-//based on http://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/tone-output-using-an-arduino/
+/*
+ * Plays given melodies, where melody is an array of NOTE, DURACTION pairs
+ *
+ * based on http://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/tone-output-using-an-arduino/
+ */
 
 #define PAUSE 0
 #define NOTE_B0  31

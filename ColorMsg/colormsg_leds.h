@@ -1,3 +1,12 @@
+/*
+ * Lights up Red, Green and Blue LEDs if supplied RGB color components exceed given thresholds
+ * 
+ * Red LED + : pin 9
+ * Green LED + : pin 8
+ * Blue LED + : pin 7
+ * all LEDs - : via resistor to GND
+ */
+
 #define pin_red 9
 #define pin_green 8
 #define pin_blue 7

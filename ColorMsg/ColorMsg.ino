@@ -21,6 +21,7 @@ void setup() {
 void loop() {
   uint16_t red, green, blue;
   read_color(false, &red, &green, &blue, scale);
+  //read_color_random(&red, &green, &blue, threshold_red, threshold_green, threshold_blue);
 
   show_color_leds(red, green, blue, threshold_red, threshold_green, threshold_blue);
 
