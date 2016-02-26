@@ -34,6 +34,8 @@ void read_color(bool illuminate, uint16_t* red, uint16_t* green, uint16_t* blue,
   uint16_t r, g, b, c;
   tcs.getRawData(&r, &g, &b, &c); //read the raw sensor output for the Red, Green, Blue and Clear segments of the sensor
 
+  //c = 1; //use to ignore clear because when using an optical fiber to transmit color, the user may touch it upon the sensor
+
   *red = map(r, 0, c * scale, 0, 255);
   *green = map(g, 0, c * scale, 0, 255);
   *blue = map(b, 0, c * scale, 0, 255);
@@ -45,3 +47,8 @@ void read_color_random(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t 
   *blue = random(blue_threshold * 2);
 }
 
+void find_color(bool* isRed, bool* isGreen, bool* isBlue, uint16_t red, uint16_t green, uint16_t blue, uint16_t red_threshold, uint16_t green_threshold, uint16_t blue_threshold){
+  *isRed = (red > red_threshold);
+  *isGreen = (green > green_threshold);
+  *isBlue = (blue > blue_threshold);
+}

@@ -15,20 +15,20 @@ void show_color_serial(uint16_t red, uint16_t green, uint16_t blue){
   Serial << red << SPACE << green << SPACE << blue << endl;
 }
 
-void show_color_name_serial(uint16_t red, uint16_t green, uint16_t blue, uint16_t threshold_red, uint16_t threshold_green, uint16_t threshold_blue){
+void show_color_name_serial(bool isRed, bool isGreen, bool isBlue){
   bool foundColor = false;
   
-  if (red > threshold_red) {
+  if (isRed) {
     Serial << " red";
     foundColor = true;
   }
   
-  if (green > threshold_green) {
+  if (isGreen) {
     Serial << " green";
     foundColor = true;
   }
   
-  if (blue > threshold_blue) {
+  if (isBlue) {
     Serial << " blue";
     foundColor = true;
   }

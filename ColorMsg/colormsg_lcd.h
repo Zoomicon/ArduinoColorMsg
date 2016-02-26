@@ -30,8 +30,13 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 void init_lcd(){
   lcd.begin(16, 2); // Set up the LCD's number of columns and rows
   lcd.noAutoscroll();
-  lcd.print("ColorMsg 1.0"); // Print a message to the LCD
+  lcd << "ColorMsg 1.0"; // Print a message to the LCD
   delay(2000); //show title for 2 sec
+}
+
+void clear_lcd_row(int row){
+  lcd.setCursor(row, 0);
+  lcd << SPACE16;
 }
 
 void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue){
@@ -41,16 +46,30 @@ void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue){
       << blue << SPACE16; //clean any leftover text from previous color display step (e.g. if values were three-digit ones and now are two-digit ones) at the end (assuming autoscroll isn't on)
 }
 
-void show_color_name_lcd(uint16_t red, uint16_t green, uint16_t blue, uint16_t threshold_red, uint16_t threshold_green, uint16_t threshold_blue){
+void show_color_name_lcd(bool isRed, bool isGreen, bool isBlue){
   lcd.setCursor(0, 0);
-  lcd.print(SPACE16); //clear first row
+  lcd << SPACE16; //clear first row
 
   lcd.setCursor(0,0);
-  if (red > threshold_red)
+  if (isRed)
     lcd << " red";
-  if (green > threshold_green)
+  if (isGreen)
     lcd << " green";
-  if (blue > threshold_blue)
+  if (isBlue)
     lcd << " blue";
+}
+
+void print_char_lcd(char c){
+  if (c != 0) {
+    lcd.setCursor(0,0);
+    lcd << SPACE16;
+    
+    lcd.setCursor(0,0);
+    lcd << (int)c;
+
+    lcd << ' ';
+
+    lcd << ((c != 0)? c : ' ');
+  }
 }
 

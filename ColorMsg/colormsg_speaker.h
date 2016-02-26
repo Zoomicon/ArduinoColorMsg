@@ -99,13 +99,9 @@
 
 int melody0[] = {
   NOTE_G3, 4,
-  PAUSE, 4,
   NOTE_B3, 4,
   NOTE_C4, 4,
-  NOTE_G3, 4,
-  PAUSE, 4,
-  NOTE_B3, 4,
-  NOTE_C4, 4
+  NOTE_G3, 4
 };
 
 int melody1[] = {
@@ -113,21 +109,15 @@ int melody1[] = {
   NOTE_G3, 8,
   NOTE_G3, 8,
   NOTE_A3, 4,
-  NOTE_G3, 4,
-  PAUSE, 4,
-  NOTE_B3, 4,
-  NOTE_C4, 4
+  NOTE_G3, 4
 };
 
 int melody2[] = {
   NOTE_G4, 4,
   NOTE_F3, 4,
   NOTE_E3, 4,
-  PAUSE, 4,
   NOTE_D3, 4,
-  NOTE_B4, 4,
-  NOTE_A3, 8,
-  NOTE_G3, 8,
+  NOTE_B4, 4
 };
 
 int melody3[] = {
@@ -135,10 +125,7 @@ int melody3[] = {
   NOTE_B3, 4,
   NOTE_C4, 4,
   NOTE_D3, 4,
-  NOTE_E3, 4,
-  PAUSE, 4,
-  NOTE_F3, 8,
-  NOTE_G3, 8,
+  NOTE_E3, 4
 };
 
 #define melody0_length ((sizeof melody0) / (sizeof (int)) / 2)
@@ -169,14 +156,14 @@ void play(int* melody, int count) {
   }
 }
 
-void show_color_name_speaker(uint16_t red, uint16_t green, uint16_t blue, uint16_t threshold_red, uint16_t threshold_green, uint16_t threshold_blue) {
-  if (red > threshold_red)
+void show_color_name_speaker(bool isRed, bool isGreen, bool isBlue) {
+  if (isRed)
     play(melody1, melody1_length);      
   
-  if (green > threshold_green)
+  if (isGreen)
     play(melody2, melody2_length);      
 
-  if (blue > threshold_blue)
+  if (isBlue)
     play(melody3, melody3_length);      
 }
 
