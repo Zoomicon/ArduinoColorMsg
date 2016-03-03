@@ -30,12 +30,12 @@ void loop() {
 
   show_color_leds(isRed, isGreen, isBlue);
 
-  show_color_name_serial(isRed, isGreen, isBlue);
   show_color_serial(red, green, blue);
+  show_color_name_serial(isRed, isGreen, isBlue);
 
-  //show_color_name_lcd(isRed, isGreen, isBlue);
-  print_char_lcd(decode_color(red, green, blue));
   show_color_lcd(red, green, blue);
+  //show_color_name_lcd(isRed, isGreen, isBlue);
+  print_char_lcd(decode_color_name(isRed, isGreen, isBlue));
 
   show_color_name_speaker(isRed, isGreen, isBlue); 
 }

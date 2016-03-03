@@ -1,6 +1,11 @@
-#define buffer_length 3
-#define code_row_length (buffer_length + 1)
+/*
+ * Place given colors in a color buffer and decode to a character after the expected number of colors (Red or Green or Blue) have been input
+ * 
+ */
 
+/*
+ * Map consequtive color names (Red or Green or Blue) to a letter and the remaining combinations to some extra symbols
+ */
 char code[] = {
   'R', 'R', 'R',   'A',
   'R', 'R', 'G',   'B',
@@ -43,12 +48,20 @@ char code[] = {
   'B', 'B', 'B',   '*'
 };
 
+#define buffer_length 3
+#define code_row_length (buffer_length + 1)
 #define code_length ((sizeof code) / (sizeof (char)) / code_row_length)
 
-char color_buffer[buffer_length] = {' ', ' ', ' '};
+/*
+ * Variables
+ */
+char color_name_buffer[buffer_length] = {' ', ' ', ' '};
 int buffer_pos = 0;
 
-char decode_color_from_code(){
+/*
+ * Decode a full color_name_buffer
+ */
+char decode_color_name_buffer(){
   //for each code row
   for (int row = 0; row < code_length; row++){
     bool match = true;
@@ -56,7 +69,7 @@ char decode_color_from_code(){
 
     //for each character in buffer
     for (int i = 0 ; i < buffer_length; i++)
-      if (color_buffer[i] != code[row_pos + i]){
+      if (color_name_buffer[i] != code[row_pos + i]){
         match = false; //found mismatch
         break; //don't check the rest of the row
       }
@@ -68,9 +81,13 @@ char decode_color_from_code(){
   return 0;
 }
 
-char decode_color(bool isRed, bool isGreen, bool isBlue){
+/*
+ * Push color name into color_name_buffer and return result of buffer decoding when it is full, then recycle
+ */
+char decode_color_name(bool isRed, bool isGreen, bool isBlue){
   char c = 0;
-   
+
+  //we only care for Red or Green or Blue color (separately) as input, so if more than one are detected, pick just one in this order: Red, Green, Blue
   if (isRed)
     c = 'R';
   else if(isGreen)
@@ -79,13 +96,13 @@ char decode_color(bool isRed, bool isGreen, bool isBlue){
     c = 'B';
 
   if (c != 0) {
-    color_buffer[buffer_pos] = c;
+    color_name_buffer[buffer_pos] = c;
 
     bool buffer_full = (buffer_pos == (buffer_length - 1)); //must check this before updating buffer_pos
     buffer_pos = (buffer_pos + 1) % buffer_length;
 
     if (buffer_full)
-      return decode_color_from_code(); //must do this after having updated buffer_pos
+      return decode_color_name_buffer(); //must do this after having updated buffer_pos
   }
 
   return 0;
