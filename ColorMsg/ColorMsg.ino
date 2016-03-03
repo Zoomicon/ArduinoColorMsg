@@ -3,7 +3,7 @@
 #include "colormsg_lcd.h"
 #include "colormsg_speaker.h"
 #include "colormsg_colorsensor.h"
-#include "decoding.h"
+#include "colormsg_decoding.h"
 
 #define scale 1
 #define threshold_red 180
