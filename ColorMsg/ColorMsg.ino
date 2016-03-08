@@ -1,3 +1,11 @@
+/*
+ * ColorMsg 2.0
+ * 
+ * Components:
+ *   Arduino board
+ *   See source code for the individual modules
+ */
+ 
 #include "colormsg_serial.h"
 #include "colormsg_leds.h"
 #include "colormsg_lcd.h"
@@ -10,16 +18,23 @@
 #define threshold_green 300
 #define threshold_blue 200
 
+/*
+ * Initialization
+ */
 void setup() {
   init_serial();
   init_leds();
   init_lcd(); //shows program name and version at 1st LCD row
   init_speaker();
   init_colorsensor();
+
+  show_message_lcd("ColorMsg 2.0", 2000); //show version for 2sec (2000msec)
   play(melody0, melody0_length);
-  clear_lcd_row(0); //clear 1st LCD row
 }
 
+/*
+ * Main loop
+ */
 void loop() {
   uint16_t red, green, blue;
   read_color(false, &red, &green, &blue, scale);

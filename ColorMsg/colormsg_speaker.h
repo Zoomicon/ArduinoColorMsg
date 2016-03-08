@@ -1,9 +1,23 @@
 /*
- * Plays given melodies, where melody is an array of NOTE, DURACTION pairs
+ * Sound/Music functions
+ * 
+ * Components:
+ *   Arduino board
+ *   8-Ohm Speaker
+ * 
+ * Wiring:
+ *   Pin 10 goes to speaker's "+" pole
+ *   Speaker's "-" pole goes to GND (ground) via 100 Ohm resistor
  *
- * based on http://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/tone-output-using-an-arduino/
+ * Based on:
+ *   http://itp.nyu.edu/physcomp/labs/labs-arduino-digital-and-analog/tone-output-using-an-arduino/
  */
 
+#define pin_audio 10 
+
+/*
+ * Note frequencies
+ */
 #define PAUSE 0
 #define NOTE_B0  31
 #define NOTE_C1  33
@@ -95,7 +109,9 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
-#define pin_audio 10
+/*
+ * Some tunes
+ */
 
 int melody0[] = {
   NOTE_G3, 4,
@@ -108,24 +124,21 @@ int melody1[] = {
   NOTE_C4, 4,
   NOTE_G3, 8,
   NOTE_G3, 8,
-  NOTE_A3, 4,
-  NOTE_G3, 4
+  NOTE_A3, 4
 };
 
 int melody2[] = {
   NOTE_G4, 4,
   NOTE_F3, 4,
   NOTE_E3, 4,
-  NOTE_D3, 4,
-  NOTE_B4, 4
+  NOTE_D3, 4
 };
 
 int melody3[] = {
   NOTE_A4, 4,
   NOTE_B3, 4,
   NOTE_C4, 4,
-  NOTE_D3, 4,
-  NOTE_E3, 4
+  NOTE_D3, 4
 };
 
 #define melody0_length ((sizeof melody0) / (sizeof (int)) / 2)
@@ -133,9 +146,15 @@ int melody3[] = {
 #define melody2_length ((sizeof melody2) / (sizeof (int)) / 2)
 #define melody3_length ((sizeof melody3) / (sizeof (int)) / 2)
 
-void  init_speaker(){
+/*
+ * Initialiation
+ */
+void  init_speaker() {
 }
 
+/*
+ * Plays given melody, where melody is an array of NOTE, DURACTION pairs
+ */
 void play(int* melody, int count) {
   // iterate over the notes of the melody:
   for (int i = 0; i < count; i++) {
@@ -156,6 +175,9 @@ void play(int* melody, int count) {
   }
 }
 
+/*
+ * Plays a different tune for R, G, B color elements
+ */
 void show_color_name_speaker(bool isRed, bool isGreen, bool isBlue) {
   if (isRed)
     play(melody1, melody1_length);      

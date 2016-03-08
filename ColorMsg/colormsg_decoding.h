@@ -1,7 +1,11 @@
 /*
- * Place given colors in a color buffer and decode to a character after the expected number of colors (Red or Green or Blue) have been input
+ * Decoding functions
  * 
+ * Components:
+ *   Arduino board
  */
+
+#define ESC 27
 
 /*
  * Map consequtive color names (Red or Green or Blue) to a letter and the remaining combinations to some extra symbols
@@ -40,12 +44,12 @@ char code[] = {
   'B', 'R', 'B',   'U',
 
   'B', 'G', 'R',   'V',
-  'B', 'G', 'G',   'X',
-  'B', 'G', 'B',   'Y',
+  'B', 'G', 'G',   'W',
+  'B', 'G', 'B',   'X',
 
-  'B', 'B', 'R',   'Z',
-  'B', 'B', 'G',   ' ',
-  'B', 'B', 'B',   '*'
+  'B', 'B', 'R',   'Y',
+  'B', 'B', 'G',   'Z',
+  'B', 'B', 'B',   ESC
 };
 
 #define buffer_length 3
@@ -61,7 +65,7 @@ int buffer_pos = 0;
 /*
  * Decode a full color_name_buffer
  */
-char decode_color_name_buffer(){
+char decode_color_name_buffer() {
   //for each code row
   for (int row = 0; row < code_length; row++){
     bool match = true;
@@ -84,7 +88,7 @@ char decode_color_name_buffer(){
 /*
  * Push color name into color_name_buffer and return result of buffer decoding when it is full, then recycle
  */
-char decode_color_name(bool isRed, bool isGreen, bool isBlue){
+char decode_color_name(bool isRed, bool isGreen, bool isBlue) {
   char c = 0;
 
   //we only care for Red or Green or Blue color (separately) as input, so if more than one are detected, pick just one in this order: Red, Green, Blue

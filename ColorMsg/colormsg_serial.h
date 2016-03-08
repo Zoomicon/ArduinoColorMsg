@@ -1,21 +1,38 @@
 /*
- * Prints to serial output the supplied color RGB value and color component (red, green, blue) names whose value is above given thresholds
+ * Serial output functions
+ * 
+ * Components:
+ *   Aduino board
+ * 
+ * Wiring:
+ *   Connect Arduino board (e.g. via USB cable) to PC
+ * 
+ * After the program is uploaded and running, can see the serial output (Arduino USB connection provides a virtual serial port) at Arduino IDEs Serial Monitor window
  */
 
 #include <Streaming.h> //http://arduiniana.org/libraries/streaming/
 
 #define SPACE " "
 
-void init_serial(){
+/*
+ * Initialization
+ */
+void init_serial() {
  Serial.begin(9600);
  Serial << endl << "" << endl << "ColorMsg 1.0" << endl << "" << endl; //can't use << endl << endl to print a blank line, use endl << "" << endl instead
 }
 
-void show_color_serial(uint16_t red, uint16_t green, uint16_t blue){
+/*
+ * Show R,G,B color values at serial output
+ */
+void show_color_serial(uint16_t red, uint16_t green, uint16_t blue) {
   Serial << red << SPACE << green << SPACE << blue << endl;
 }
 
-void show_color_name_serial(bool isRed, bool isGreen, bool isBlue){
+/*
+ * Show Red / Green / Blue color element names at serial output
+ */
+void show_color_name_serial(bool isRed, bool isGreen, bool isBlue) {
   bool foundColor = false;
   
   if (isRed) {
