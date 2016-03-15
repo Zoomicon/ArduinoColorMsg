@@ -39,6 +39,7 @@ void setup() {
 void loop() {
   uint16_t red, green, blue;
   read_color(false, &red, &green, &blue, scale); //read color from color sensor
+  //read_color_random(&red, &green, &blue, threshold_red, threshold_green, threshold_blue); //get a random color value
   //read_color_random_pure(&red, &green, &blue, threshold_red, threshold_green, threshold_blue); //get a random color value (pure Red or Green or Blue only)
 
   bool isRed, isGreen, isBlue;
@@ -49,10 +50,10 @@ void loop() {
   show_color_serial(red, green, blue);
   show_color_name_serial(isRed, isGreen, isBlue);
 
-  //show_color_lcd(red, green, blue); //print color element values to 1st LCD row
-  show_color_name_lcd(isRed, isGreen, isBlue); //print color name (for each detected color element) to 1st LCD row
+  //show_color_lcd(0, red, green, blue); //print color element values to given LCD row
+  show_color_name_lcd(0, isRed, isGreen, isBlue); //print color name (for each detected color element) to given LCD row
   //
-  print_char_lcd(decode_color_name(isRed, isGreen, isBlue)); //print detected characters (if any) to 2nd LCD row
+  print_char_lcd(1, decode_color_name(isRed, isGreen, isBlue)); //print detected characters (if any) to given LCD row
 
   show_color_name_speaker(isRed, isGreen, isBlue); 
 }

@@ -38,7 +38,7 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
  * Clear given LCD row (assuming 16 columns)
  */
 void clear_lcd_row(int row) {
-  lcd.setCursor(row, 0);
+  lcd.setCursor(0, row);
   lcd << SPACE16;
 }
 
@@ -63,10 +63,12 @@ void show_message_lcd(char* msg, int delay_msec) {
 }
 
 /*
- * Show R,G,B color values at 1st LCD row
+ * Show R,G,B color values at given LCD row
  */
-void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue) {
-  lcd.setCursor(0, 0); //go to 1st row, 1st column
+void show_color_lcd(int row, uint16_t red, uint16_t green, uint16_t blue) {
+  clear_lcd_row(row); //clear given row
+  
+  lcd.setCursor(0, row); //go to given row, 1st column
   lcd << SPACE
       << red << SPACE
       << green << SPACE
@@ -74,13 +76,12 @@ void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue) {
 }
 
 /*
- * Show Red / Green / Blue color element names at 1st LCD row
+ * Show Red / Green / Blue color element names at given LCD row
  */
-void show_color_name_lcd(bool isRed, bool isGreen, bool isBlue) {
-  lcd.setCursor(0, 0); //go to 1st row, 1st column
-  lcd << SPACE16; //clear row
-
-  lcd.setCursor(0,0);
+void show_color_name_lcd(int row, bool isRed, bool isGreen, bool isBlue) {
+  clear_lcd_row(row); //clear given row
+  
+  lcd.setCursor(0, row);
   if (isRed)
     lcd << " red";
   if (isGreen)
@@ -94,17 +95,16 @@ int char_column = 0;
 /*
  * Clear the screen if ESC (=27) is given, else print given character if non-zero
  */
-void print_char_lcd(char c) {
+void print_char_lcd(int row, char c) {
   if (c == ESC) {
-    lcd.clear(); //clear LCD and position cursor at upper-left
-    char_column = 0; //reset our cursor back to 1st column (of 2nd row)
+    clear_lcd_row(row); //clear LCD row
+    char_column = 0; //move back to 1st column
   }
   else if (c != 0) {
-    lcd.setCursor(char_column, 1); //got to char_column at 2nd row
+    lcd.setCursor(char_column, row); //got to char_column at 2nd row
     lcd << c;
-    if (++char_column == 16){ //if 2nd row is full...
-      lcd.setCursor(0,1); //go to 1st column at 2nd row
-      lcd << SPACE16; //clear row
+    if (++char_column == 16) { //if 2nd row is full...
+      clear_lcd_row(row); //clear LCD row
       char_column = 0; //move back to 1st column
     }
   }
