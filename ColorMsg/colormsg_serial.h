@@ -12,14 +12,20 @@
 
 #include <Streaming.h> //http://arduiniana.org/libraries/streaming/
 
-#define SPACE " "
+#define SPACE ' '
 
 /*
  * Initialization
  */
 void init_serial() {
  Serial.begin(9600);
- Serial << endl << "" << endl << "ColorMsg 1.0" << endl << "" << endl; //can't use << endl << endl to print a blank line, use endl << "" << endl instead
+}
+
+/*
+ * Show string and clear after a delay
+ */
+void show_message_serial(char* msg) {
+  Serial << endl << msg << endl << "" << endl; //can't use << endl << endl to print a blank line, use endl << "" << endl instead
 }
 
 /*

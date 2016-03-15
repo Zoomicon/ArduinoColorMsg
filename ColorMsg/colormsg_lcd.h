@@ -47,14 +47,14 @@ void clear_lcd_row(int row) {
  */
 void init_lcd() {
   lcd.begin(16, 2); // Set up the LCD's number of columns and rows
+  lcd.noAutoscroll(); //disable scrolling
+  lcd.clear(); //clear LCD and position cursor at upper-left
 }
 
 /*
  * Show string and clear after a delay
  */
 void show_message_lcd(char* msg, int delay_msec) {
-  lcd.noAutoscroll();
-  
   lcd.clear(); //clear LCD and position cursor at upper-left
   lcd << msg; // Print message to the LCD
   
@@ -66,9 +66,7 @@ void show_message_lcd(char* msg, int delay_msec) {
  * Show R,G,B color values at 1st LCD row
  */
 void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue) {
-  lcd.noAutoscroll();
-  
-  lcd.setCursor(0, 0);
+  lcd.setCursor(0, 0); //go to 1st row, 1st column
   lcd << SPACE
       << red << SPACE
       << green << SPACE
@@ -79,9 +77,7 @@ void show_color_lcd(uint16_t red, uint16_t green, uint16_t blue) {
  * Show Red / Green / Blue color element names at 1st LCD row
  */
 void show_color_name_lcd(bool isRed, bool isGreen, bool isBlue) {
-  lcd.noAutoscroll();
-  
-  lcd.setCursor(0, 0);
+  lcd.setCursor(0, 0); //go to 1st row, 1st column
   lcd << SPACE16; //clear row
 
   lcd.setCursor(0,0);
@@ -93,16 +89,24 @@ void show_color_name_lcd(bool isRed, bool isGreen, bool isBlue) {
     lcd << " blue";
 }
 
+int char_column = 0;
+
 /*
  * Clear the screen if ESC (=27) is given, else print given character if non-zero
  */
 void print_char_lcd(char c) {
-  if (c == ESC)
+  if (c == ESC) {
     lcd.clear(); //clear LCD and position cursor at upper-left
+    char_column = 0; //reset our cursor back to 1st column (of 2nd row)
+  }
   else if (c != 0) {
-    lcd.autoscroll();
-    lcd.setCursor(2,16);
+    lcd.setCursor(char_column, 1); //got to char_column at 2nd row
     lcd << c;
+    if (++char_column == 16){ //if 2nd row is full...
+      lcd.setCursor(0,1); //go to 1st column at 2nd row
+      lcd << SPACE16; //clear row
+      char_column = 0; //move back to 1st column
+    }
   }
 }
 

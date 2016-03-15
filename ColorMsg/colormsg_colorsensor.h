@@ -61,6 +61,20 @@ void read_color_random(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t 
 }
 
 /*
+ * Return a random color value (pure Red or Green or Blue only)
+ */
+void read_color_random_pure(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t red_threshold, uint16_t green_threshold, uint16_t blue_threshold) {
+  // red = random value between 0 and (red_threshold*2 - 1)
+  *red = random(red_threshold * 2);
+
+  // if red>=red_threshold, set green=0 else green=random value between 0 and (green_threshold*2 - 1)
+  *green = (*red >= red_threshold) ? 0 : random(green_threshold * 2);
+
+  // if red>=red_threshold or green>=green_threshold, set blue=0 else blue=random value between 0 and (blue_threshold*2 - 1)
+  *blue = ((*red >= red_threshold) || (*green >= green_threshold)) ? 0 : random(blue_threshold * 2);
+}
+
+/*
  * Check if given Red, Green, Blue values are above given thresholds
  */
 void find_color(bool* isRed, bool* isGreen, bool* isBlue, uint16_t red, uint16_t green, uint16_t blue, uint16_t red_threshold, uint16_t green_threshold, uint16_t blue_threshold) {

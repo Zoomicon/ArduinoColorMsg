@@ -14,9 +14,9 @@
 #include "colormsg_decoding.h"
 
 #define scale 1
-#define threshold_red 180
-#define threshold_green 300
-#define threshold_blue 200
+#define threshold_red 240
+#define threshold_green 220
+#define threshold_blue 240
 
 /*
  * Initialization
@@ -28,6 +28,7 @@ void setup() {
   init_speaker();
   init_colorsensor();
 
+  show_message_serial("ColorMsg 2.0");
   show_message_lcd("ColorMsg 2.0", 2000); //show version for 2sec (2000msec)
   play(melody0, melody0_length);
 }
@@ -37,8 +38,8 @@ void setup() {
  */
 void loop() {
   uint16_t red, green, blue;
-  read_color(false, &red, &green, &blue, scale);
-  //read_color_random(&red, &green, &blue, threshold_red, threshold_green, threshold_blue);
+  read_color(false, &red, &green, &blue, scale); //read color from color sensor
+  //read_color_random_pure(&red, &green, &blue, threshold_red, threshold_green, threshold_blue); //get a random color value (pure Red or Green or Blue only)
 
   bool isRed, isGreen, isBlue;
   find_color(&isRed, &isGreen, &isBlue, red, green, blue, threshold_red, threshold_green, threshold_blue);
@@ -48,9 +49,10 @@ void loop() {
   show_color_serial(red, green, blue);
   show_color_name_serial(isRed, isGreen, isBlue);
 
-  show_color_lcd(red, green, blue);
-  //show_color_name_lcd(isRed, isGreen, isBlue);
-  print_char_lcd(decode_color_name(isRed, isGreen, isBlue));
+  //show_color_lcd(red, green, blue); //print color element values to 1st LCD row
+  show_color_name_lcd(isRed, isGreen, isBlue); //print color name (for each detected color element) to 1st LCD row
+  //
+  print_char_lcd(decode_color_name(isRed, isGreen, isBlue)); //print detected characters (if any) to 2nd LCD row
 
   show_color_name_speaker(isRed, isGreen, isBlue); 
 }

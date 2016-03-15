@@ -92,11 +92,11 @@ char decode_color_name(bool isRed, bool isGreen, bool isBlue) {
   char c = 0;
 
   //we only care for Red or Green or Blue color (separately) as input, so if more than one are detected, pick just one in this order: Red, Green, Blue
-  if (isRed)
+  if (isRed && !isGreen && !isBlue)
     c = 'R';
-  else if(isGreen)
+  else if(!isRed && isGreen && !isBlue)
     c = 'G';
-  else if (isBlue)
+  else if (!isRed && !isGreen && isBlue)
     c = 'B';
 
   if (c != 0) {
