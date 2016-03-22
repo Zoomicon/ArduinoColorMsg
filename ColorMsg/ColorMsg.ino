@@ -1,17 +1,20 @@
 /*
  * ColorMsg 2.0
  * 
+ * Read a series of emitted color values (Red, Green or Blue) and decode letters to display a message
+ * Also displays Red, Green and Blue elements of received colors (via LED, LCD, Serial and Buzzer)
+ * 
  * Components:
  *   Arduino board
  *   See source code for the individual modules
  */
  
-#include "colormsg_serial.h"
-#include "colormsg_leds.h"
-#include "colormsg_lcd.h"
-#include "colormsg_speaker.h"
-#include "colormsg_colorsensor.h"
-#include "colormsg_decoding.h"
+#include "serial.h"
+#include "leds.h"
+#include "lcd.h"
+#include "speaker.h"
+#include "colorsensor.h"
+#include "decoding.h"
 
 #define scale 1
 #define threshold_red 240
